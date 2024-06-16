@@ -2,7 +2,7 @@ const express=require("express");
 const bodyparser=require("body-parser");
 const app=express();
 app.set("view engine","ejs");
-let todos=[{id : "1",
+let todos=[{todoid : "1",
 todotitle : "code",
 todoaction : "true"},
 {
@@ -39,20 +39,9 @@ todoaction : action
         data : todos,
     });
 });
-// to update the contents of some id
-// app.post('/addtodos/:id',(req,res) => {
-//     const id=req.params.id;
-//     const stat=todos.find((t) => t.id == id);
-//     if(!stat){
-//         req.status(400).json({err:"not found"});
-//     }
-//     todos.title=req.body.title || stat.title;
-//     todos.action=req.body.action || stat.action;
-//     res.json(todos);
-// });
 app.post('/deletetodos', (req,res) => {
-const id=req.params.id;
-var j=1;
+const id=req.body.id;
+var j=0;
 todos.forEach(element => {
 j=j+1;
 if(element.todoid == id){

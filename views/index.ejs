@@ -16,17 +16,17 @@
     <td><%= element.todotitle %></td>
     <td><%= element.todoaction %></td>
     <td>
-        <form action="/deletetodo" method="post">
-            <input type="hidden" name="todoid" value="<%= element.todoid %>">
-            <input type="hidden" name="todotitle" value="<%= element.todotitle %>">
-            <input type="hidden" name="todoaction" value="<%= element.todoaction %>">
+        <form action="/deletetodos" method="post">
+            <input type="text" name="todoid" value="<%= element.todoid %>">
+            <input type="text" name="todotitle" value="<%= element.todotitle %>">
+            <input type="text" name="todoaction" value="<%= element.todoaction %>">
             <button type="submit">Delete</button>
         </form>
     </td>
 </tr>
        <% }) %>
     </table>
-    <form action="/addtodo" method="post">
+    <form action="/addtodos" method="post">
         <input type="text" name "todotask" placeholder="input details">
         <button type="submit">Add</button>
     </form>
