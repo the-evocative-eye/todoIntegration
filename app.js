@@ -50,6 +50,18 @@ if(element.todoid == id){
 });
 res.redirect("/");
 });
+app.put('/updatetodos',(req,res) => {
+    const id=req.body.id;
+    const title=req.body.title;
+    var j=0;
+    todos.forEach(element => {
+        j=j+1;
+        if(element.todoid == id){
+            element.todotitle = title;
+        }
+    });
+    res.redirect("/");
+});
 const port=process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`running on ${port}`);
