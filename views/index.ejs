@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>todo</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>action</th>
+        </tr>
+        <% data.forEach(element => { %>
+<tr>
+    <td><%= element.todoid %></td>
+    <td><%= element.todotitle %></td>
+    <td><%= element.todoaction %></td>
+</tr>
+       <% }) %>
+    </table>
+    <form action="/addtodo" method="post">
+        <input type="text" name "todotask" placeholder="input details">
+        <button type="submit">Add</button>
+    </form>
+</body>
+</html>
