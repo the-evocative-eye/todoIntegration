@@ -15,6 +15,14 @@
     <td><%= element.todoid %></td>
     <td><%= element.todotitle %></td>
     <td><%= element.todoaction %></td>
+    <td>
+        <form action="/deletetodo" method="post">
+            <input type="hidden" name="todoid" value="<%= element.todoid %>">
+            <input type="hidden" name="todotitle" value="<%= element.todotitle %>">
+            <input type="hidden" name="todoaction" value="<%= element.todoaction %>">
+            <button type="submit">Delete</button>
+        </form>
+    </td>
 </tr>
        <% }) %>
     </table>

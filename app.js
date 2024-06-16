@@ -50,14 +50,16 @@ todoaction : action
 //     todos.action=req.body.action || stat.action;
 //     res.json(todos);
 // });
-app.post('/deletetodos/:id', (req,res) => {
+app.post('/deletetodos', (req,res) => {
 const id=req.params.id;
-const index=todos.find((t) => t.id == id);
-if(index == -1){
-req.status(400).json({err:"not found"});
+var j=1;
+todos.forEach(element => {
+j=j+1;
+if(element.todoid == id){
+    todos.splice(j-1,1);
 }
-todos.splice(index,1);
-res.status(204).send();
+});
+res.redirect("/");
 });
 const port=process.env.PORT || 3000;
 app.listen(port, () => {
