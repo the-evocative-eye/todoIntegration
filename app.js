@@ -1,30 +1,42 @@
 const express=require("express");
 const bodyparser=require("body-parser");
+const mongoose=require("mongoose");
 const app=express();
 app.set("view engine","ejs");
-let todos=[{todoid : "1",
-todotitle : "code",
-todoaction : "true"},
-{
-    todoid : "2",
-todotitle : "eat",
-todoaction : "true"
-},
-{
-    todoid : "3",
-todotitle : "sleep",
-todoaction : "true"
-}, 
-{ todoid : "4",
-todotitle : "repeat",
-todoaction : "false"}];
+mongoose.connect("mongodb://localhost/27017/input_variables" , {
+useNewUrlParser : true,
+useUnifiedTopology : true
+});
+var schema = new mongoose.Schema({
+    todoid : Number,
+todotitle : String ,
+todoaction : String,
+});
+var todos = mongoose.model("todos",schema);
+// let todos=[{todoid : "1",
+// todotitle : "code",
+// todoaction : "true"},
+// {
+//     todoid : "2",
+// todotitle : "eat",
+// todoaction : "true"
+// },
+// {
+//     todoid : "3",
+// todotitle : "sleep",
+// todoaction : "true"
+// }, 
+// { todoid : "4",
+// todotitle : "repeat",
+// todoaction : "false"}];
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 // to display the contents in todolist on home page
 app.get('/', (req,res) => {
-res.render("index" ,{
-    data : todos,
-});
+todos.find({},function(err,todo){
+if(err) throw err;
+res.render("index",{todo : todo});
+})
 })
 app.post('/addtodos',(req,res) => {
        const id = todos.length+1;
